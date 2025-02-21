@@ -3,7 +3,7 @@
     "description": "Спецификации для управления пакетом rx",
     "type": "object",
     "properties": {
-        "deformation_parameters": {
+        "deform_params": {
             "type": "object",
             "description": "Параметры деформации поликристалла",
             "properties": {
@@ -13,17 +13,129 @@
                     "minimum": 1
                 },
                 "dt": {
-                    "description": "Шаг интегрирования по времени",
+                    "description": "Шаг интегрирования по времени [s]",
                     "type": "number",
                     "minimum": 0
                 },
                 "t_max": {
-                    "description": "Максимальное время интегрирования (если 0, то определяется по eps_u_max)",
+                    "description": "Максимальное время интегрирования (если 0, то определяется по eps_u_max)\n[s]",
                     "type": "number",
                     "minimum": 0
                 },
                 "eps_u_max": {
                     "description": "Максимальная деформация (если 0, то определяется по t_max)",
+                    "type": "number",
+                    "minimum": 0
+                },
+                "с1": {
+                    "description": "Константа тензора упругих свойств (можно задать либо просто числом, либо массивом задать температурную аппроксимация с1_1 * temp + c1_2) [Pa]",
+                    "oneOf": [
+                        {
+                            "type": "number",
+                            "minimum": 0
+                        },
+                        {
+                            "type": "array",
+                            "minItems": 2,
+                            "maxItems": 2,
+                            "items": {
+                                "type": "number"
+                            }
+                        }
+                    ]
+                },
+                "с2": {
+                    "description": "Константа тензора упругих свойств (можно задать либо просто числом, либо массивом задать температурную аппроксимация с2_1 * temp + c2_2) [Pa]",
+                    "oneOf": [
+                        {
+                            "type": "number",
+                            "minimum": 0
+                        },
+                        {
+                            "type": "array",
+                            "minItems": 2,
+                            "maxItems": 2,
+                            "items": {
+                                "type": "number"
+                            }
+                        }
+                    ]
+                },
+                "с3": {
+                    "description": "Константа тензора упругих свойств (можно задать либо просто числом, либо массивом задать температурную аппроксимация с3_1 * temp + c3_2) [Pa]",
+                    "oneOf": [
+                        {
+                            "type": "number",
+                            "minimum": 0
+                        },
+                        {
+                            "type": "array",
+                            "minItems": 2,
+                            "maxItems": 2,
+                            "items": {
+                                "type": "number"
+                            }
+                        }
+                    ]
+                },
+                "tau_c0": {
+                    "description": "Начальное касательное критическое напряжение сдвига по системе скольжения (можно задать либо просто числом, либо массивом задать температурную аппроксимация tau_c0_1 * exp(-temp / tau_c0_2) [Pa]",
+                    "oneOf": [
+                        {
+                            "type": "number",
+                            "minimum": 0
+                        },
+                        {
+                            "type": "array",
+                            "minItems": 2,
+                            "maxItems": 2,
+                            "items": {
+                                "type": "number"
+                            }
+                        }
+                    ]
+                },
+                "nnn": {
+                    "description": "Параметр скоростной чувствительности",
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "q_lat": {
+                    "description": "Параметр латентного упрочнения",
+                    "type": "number",
+                    "minimum": 0
+                },
+                "k1": {
+                    "description": "Параметр упрочнения",
+                    "type": "number",
+                    "minimum": 0
+                },
+                "k2": {
+                    "description": "Параметр упрочнения",
+                    "type": "number",
+                    "minimum": 0
+                },
+                "hi": {
+                    "description": "Параметр упрочнения",
+                    "type": "number",
+                    "minimum": 0
+                },
+                "hp": {
+                    "description": "Парметр закона Холла-Петча",
+                    "type": "number",
+                    "minimum": 0
+                },
+                "displ_vel_grad": {
+                    "description": "Градиент скорости перемещений [s^-1]",
+                    "type": "array",
+                    "minItems": 9,
+                    "maxItems": 9,
+                    "items": {
+                        "type": "number"
+                    }
+                },
+                "temp": {
+                    "description": "Температура [K]",
                     "type": "number",
                     "minimum": 0
                 }
