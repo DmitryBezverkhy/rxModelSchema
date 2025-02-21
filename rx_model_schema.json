@@ -8,7 +8,7 @@
             "description": "Параметры деформации поликристалла",
             "properties": {
                 "num_of_grs_init": {
-                    "description": "Начальное количество зерен",
+                    "description": "Начальное количество зерен\n[-]",
                     "type": "integer",
                     "minimum": 1
                 },
@@ -23,7 +23,7 @@
                     "minimum": 0
                 },
                 "eps_u_max": {
-                    "description": "Максимальная деформация\n(если 0, то определяется по t_max)",
+                    "description": "Максимальная деформация\n(если 0, то определяется по t_max)\n[-]",
                     "type": "number",
                     "minimum": 0
                 },
@@ -96,32 +96,37 @@
                     ]
                 },
                 "nnn": {
-                    "description": "Параметр скоростной чувствительности",
+                    "description": "Параметр скоростной чувствительности\n[-]",
                     "type": "integer",
                     "minimum": 0
                 },
+                "ro_init_sum": {
+                    "description": "Суммарная по всем 12 системам скольжения начальная плотность дислокаций\n(Т.е. начальная плотность дислокаций в каждой системе скольжения = ro_init_sum / 12)\n[m^-2]",
+                    "type": "number",
+                    "minimum": 0
+                },
                 "q_lat": {
-                    "description": "Параметр латентного упрочнения",
+                    "description": "Параметр латентного упрочнения\n[-]",
                     "type": "number",
                     "minimum": 0
                 },
                 "k1": {
-                    "description": "Параметр упрочнения",
+                    "description": "Параметр упрочнения\n[-]",
                     "type": "number",
                     "minimum": 0
                 },
                 "k2": {
-                    "description": "Параметр упрочнения",
+                    "description": "Параметр упрочнения\n[-]",
                     "type": "number",
                     "minimum": 0
                 },
                 "hi": {
-                    "description": "Параметр упрочнения",
+                    "description": "Параметр упрочнения\n[-]",
                     "type": "number",
                     "minimum": 0
                 },
                 "hp": {
-                    "description": "Парметр закона Холла-Петча",
+                    "description": "Парметр закона Холла-Петча\n[-]",
                     "type": "number",
                     "minimum": 0
                 },
@@ -136,6 +141,78 @@
                 },
                 "temp": {
                     "description": "Температура\n[K]",
+                    "type": "number",
+                    "minimum": 0
+                },
+                "gr_r_init": {
+                    "description": "Начальный размер (радиус) зерен\n(Размеры зерен задаются по распределению...)\n[м]",
+                    "type": "number",
+                    "minimum": 0
+                }
+            }
+        },
+        "rx_params": {
+            "type": "object",
+            "description": "Параметры рекристаллизации",
+            "properties": {
+                "rx_on": {
+                    "description": "Вкл/выкл рекристаллизации",
+                    "type": "boolean"
+                },
+                "e_gb": {
+                    "description": "Энергия межзеренной границы\n[J * m^-2]",
+                    "type": "number",
+                    "minimum": 0
+                },
+                "m_hag": {
+                    "description": "Мобильность большеугловой границы\n[m^4 * J^-1 * s^-1]",
+                    "type": "number",
+                    "minimum": 0
+                },
+                "m_lag": {
+                    "description": "Мобильность малоугловой границы\n(если равно числу, то параметр m_lag0 не используется, если равно null, то m_lag = m_lag0 * m_hag)\n[m^4 * J^-1 * s^-1]",
+                    "oneOf": [
+                        {
+                            "type": "number",
+                            "minimum": 0
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ]
+                },
+                "m_lag0": {
+                    "description": "Множитель мобильности малоугловой границы\n(m_lag = m_lag0 * m_hag)\n[-]",
+                    "type": "number",
+                    "minimum": 0
+                },
+                "gamma_sub": {
+                    "description": "Энергия субзеренной границы\n[J * m^-2]",
+                    "type": "number",
+                    "minimum": 0
+                },
+                "k_sub": {
+                    "description": "Параметр в соотношении для среднего размера субзерна\n[-]",
+                    "type": "number",
+                    "minimum": 0
+                },
+                "gr_r_min": {
+                    "description": "Минимальный размер (радиус) зерна, ниже которого зерно можно считать по размеру равным субзерну, в результате зерно удаляется из выборки\n[m]",
+                    "type": "number",
+                    "minimum": 0
+                },
+                "e_gb": {
+                    "description": "Энергия межзеренной границы\n[J * m^-2]",
+                    "type": "number",
+                    "minimum": 0
+                },
+                "e_gb": {
+                    "description": "Энергия межзеренной границы\n[J * m^-2]",
+                    "type": "number",
+                    "minimum": 0
+                },
+                "e_gb": {
+                    "description": "Энергия межзеренной границы\n[J * m^-2]",
                     "type": "number",
                     "minimum": 0
                 }
