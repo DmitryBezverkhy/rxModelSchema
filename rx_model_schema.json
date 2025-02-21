@@ -3,12 +3,31 @@
     "description": "Спецификации для управления пакетом rx",
     "type": "object",
     "properties": {
-        "num_of_grs_init": {
-            "description": "Количество зерен",
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 100
+        "deformation_parameters": {
+            "type": "object",
+            "description": "Параметры деформации поликристалла",
+            "properties": {
+                "num_of_grs_init": {
+                    "description": "Начальное количество зерен",
+                    "type": "integer",
+                    "minimum": 1
+                },
+                "dt": {
+                    "description": "Шаг интегрирования по времени",
+                    "type": "number",
+                    "minimum": 0
+                },
+                "t_max": {
+                    "description": "Максимальное время интегрирования (если 0, то определяется по eps_u_max)",
+                    "type": "number",
+                    "minimum": 0
+                },
+                "eps_u_max": {
+                    "description": "Максимальная деформация (если 0, то определяется по t_max)",
+                    "type": "number",
+                    "minimum": 0
+                }
+            }
         }
-
     }
 }
