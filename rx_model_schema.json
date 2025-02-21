@@ -1,5 +1,14 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "description": "Спецификации для управления пакетом rx",
-    "type": "object"
+    "type": "object",
+    "properties": {
+        "num_of_grs_init": {
+            "description": "Количество зерен",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+        }
+
+    }
 }
