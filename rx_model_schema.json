@@ -1,207 +1,222 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema#",
-    "description": "Спецификации для управления пакетом rx",
-    "type": "object",
-    "properties": {
-        "deform_params": {
-            "type": "object",
-            "description": "Параметры деформации поликристалла",
-            "properties": {
-                "num_of_grs_init": {
-                    "description": "Начальное количество зерен\n[-]",
-                    "type": "integer",
-                    "minimum": 1
-                },
-                "dt": {
-                    "description": "Шаг интегрирования по времени\n[s]",
-                    "type": "number",
-                    "minimum": 0
-                },
-                "t_max": {
-                    "description": "Максимальное время интегрирования\n(если 0, то определяется по eps_u_max)\n[s]",
-                    "type": "number",
-                    "minimum": 0
-                },
-                "eps_u_max": {
-                    "description": "Максимальная деформация\n(если 0, то определяется по t_max)\n[-]",
-                    "type": "number",
-                    "minimum": 0
-                },
-                "с1": {
-                    "description": "Константа тензора упругих свойств\n(можно задать либо просто числом, либо массивом задать температурную аппроксимация с1_1 * temp + c1_2)\n[Pa]",
-                    "oneOf": [
-                        {
-                            "type": "number",
-                            "minimum": 0
-                        },
-                        {
-                            "type": "array",
-                            "minItems": 2,
-                            "maxItems": 2,
-                            "items": {
-                                "type": "number"
-                            }
-                        }
-                    ]
-                },
-                "с2": {
-                    "description": "Константа тензора упругих свойств\n(можно задать либо просто числом, либо массивом задать температурную аппроксимация с2_1 * temp + c2_2)\n[Pa]",
-                    "oneOf": [
-                        {
-                            "type": "number",
-                            "minimum": 0
-                        },
-                        {
-                            "type": "array",
-                            "minItems": 2,
-                            "maxItems": 2,
-                            "items": {
-                                "type": "number"
-                            }
-                        }
-                    ]
-                },
-                "с3": {
-                    "description": "Константа тензора упругих свойств\n(можно задать либо просто числом, либо массивом задать температурную аппроксимация с3_1 * temp + c3_2)\n[Pa]",
-                    "oneOf": [
-                        {
-                            "type": "number",
-                            "minimum": 0
-                        },
-                        {
-                            "type": "array",
-                            "minItems": 2,
-                            "maxItems": 2,
-                            "items": {
-                                "type": "number"
-                            }
-                        }
-                    ]
-                },
-                "tau_c0": {
-                    "description": "Начальное касательное критическое напряжение сдвига по системе скольжения\n(можно задать либо просто числом, либо массивом задать температурную аппроксимация tau_c0_1 * exp(-temp / tau_c0_2))\n[Pa]",
-                    "oneOf": [
-                        {
-                            "type": "number",
-                            "minimum": 0
-                        },
-                        {
-                            "type": "array",
-                            "minItems": 2,
-                            "maxItems": 2,
-                            "items": {
-                                "type": "number"
-                            }
-                        }
-                    ]
-                },
-                "nnn": {
-                    "description": "Параметр скоростной чувствительности\n[-]",
-                    "type": "integer",
-                    "minimum": 0
-                },
-                "ro_init_sum": {
-                    "description": "Суммарная по всем 12 системам скольжения начальная плотность дислокаций\n(Т.е. начальная плотность дислокаций в каждой системе скольжения = ro_init_sum / 12)\n[m^-2]",
-                    "type": "number",
-                    "minimum": 0
-                },
-                "q_lat": {
-                    "description": "Параметр латентного упрочнения\n[-]",
-                    "type": "number",
-                    "minimum": 0
-                },
-                "k1": {
-                    "description": "Параметр упрочнения\n[-]",
-                    "type": "number",
-                    "minimum": 0
-                },
-                "k2": {
-                    "description": "Параметр упрочнения\n[-]",
-                    "type": "number",
-                    "minimum": 0
-                },
-                "hi": {
-                    "description": "Параметр упрочнения\n[-]",
-                    "type": "number",
-                    "minimum": 0
-                },
-                "hp": {
-                    "description": "Парметр закона Холла-Петча\n[-]",
-                    "type": "number",
-                    "minimum": 0
-                },
-                "displ_vel_grad": {
-                    "description": "Градиент скорости перемещений\n[s^-1]",
-                    "type": "array",
-                    "minItems": 9,
-                    "maxItems": 9,
-                    "items": {
-                        "type": "number"
-                    }
-                },
-                "temp": {
-                    "description": "Температура\n[K]",
-                    "type": "number",
-                    "minimum": 0
-                },
-                "gr_r_init": {
-                    "description": "Начальный размер (радиус) зерен\n(Размеры зерен задаются по распределению...)\n[m]",
-                    "type": "number",
-                    "minimum": 0
-                }
-            }
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "Спецификации для управления пакетом rx",
+  "type": "object",
+  "properties": {
+    "deform_params": {
+      "type": "object",
+      "description": "Параметры деформации поликристалла",
+      "properties": {
+        "num_of_grs_init": {
+          "description": "Начальное количество зерен\n[-]",
+          "type": "integer",
+          "minimum": 1
         },
-        "rx_params": {
-            "type": "object",
-            "description": "Параметры рекристаллизации",
-            "properties": {
-                "rx_on": {
-                    "description": "Вкл/выкл рекристаллизации",
-                    "type": "boolean"
-                },
-                "e_gb": {
-                    "description": "Энергия межзеренной границы\n[J * m^-2]",
-                    "type": "number",
-                    "minimum": 0
-                },
-                "m_hag": {
-                    "description": "Мобильность большеугловой границы\n[m^4 * J^-1 * s^-1]",
-                    "type": "number",
-                    "minimum": 0
-                },
-                "m_lag": {
-                    "description": "Мобильность малоугловой границы\n(если равно числу, то параметр m_lag0 не используется, если равно null, то m_lag = m_lag0 * m_hag)\n[m^4 * J^-1 * s^-1]",
-                    "oneOf": [
-                        {
-                            "type": "number",
-                            "minimum": 0
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ]
-                },
-                "m_lag0": {
-                    "description": "Множитель мобильности малоугловой границы\n(m_lag = m_lag0 * m_hag)\n[-]",
-                    "type": "number",
-                    "minimum": 0
-                },
-                "gamma_sub": {
-                    "description": "Энергия субзеренной границы\n[J * m^-2]",
-                    "type": "number",
-                    "minimum": 0
-                },
-                "k_sub": {
-                    "description": "Параметр в соотношении для среднего размера субзерна\n[-]",
-                    "type": "number",
-                    "minimum": 0
-                },
-                "gr_r_min": {
-                    "description": "Минимальный размер (радиус) зерна, ниже которого зерно можно считать по размеру равным субзерну, в результате зерно удаляется из выборки\n[m]",
-                    "type": "number",
-                    "minimum": 0
-                }
+        "dt": {
+          "description": "Шаг интегрирования по времени\n[s]",
+          "type": "number",
+          "minimum": 0
+        },
+        "t_max": {
+          "description": "Максимальное время интегрирования\n(если 0, то определяется по eps_u_max)\n[s]",
+          "type": "number",
+          "minimum": 0
+        },
+        "eps_u_max": {
+          "description": "Максимальная деформация\n(если 0, то определяется по t_max)\n[-]",
+          "type": "number",
+          "minimum": 0
+        },
+        "с1": {
+          "description": "Константа тензора упругих свойств\n(можно задать либо просто числом, либо массивом задать температурную аппроксимация с1_1 * temp + c1_2)\n[Pa]",
+          "oneOf": [
+            {
+              "type": "number",
+              "minimum": 0
+            },
+            {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number"
+              }
             }
+          ]
+        },
+        "с2": {
+          "description": "Константа тензора упругих свойств\n(можно задать либо просто числом, либо массивом задать температурную аппроксимация с2_1 * temp + c2_2)\n[Pa]",
+          "oneOf": [
+            {
+              "type": "number",
+              "minimum": 0
+            },
+            {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number"
+              }
+            }
+          ]
+        },
+        "с3": {
+          "description": "Константа тензора упругих свойств\n(можно задать либо просто числом, либо массивом задать температурную аппроксимация с3_1 * temp + c3_2)\n[Pa]",
+          "oneOf": [
+            {
+              "type": "number",
+              "minimum": 0
+            },
+            {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number"
+              }
+            }
+          ]
+        },
+        "tau_c0": {
+          "description": "Начальное касательное критическое напряжение сдвига по системе скольжения\n(можно задать либо просто числом, либо массивом задать температурную аппроксимация tau_c0_1 * exp(-temp / tau_c0_2))\n[Pa]",
+          "oneOf": [
+            {
+              "type": "number",
+              "minimum": 0
+            },
+            {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "number"
+              }
+            }
+          ]
+        },
+        "nnn": {
+          "description": "Параметр скоростной чувствительности\n[-]",
+          "type": "integer",
+          "minimum": 0
+        },
+        "ro_init_sum": {
+          "description": "Суммарная по всем 12 системам скольжения начальная плотность дислокаций\n(Т.е. начальная плотность дислокаций в каждой системе скольжения = ro_init_sum / 12)\n[m^-2]",
+          "type": "number",
+          "minimum": 0
+        },
+        "q_lat": {
+          "description": "Параметр латентного упрочнения\n[-]",
+          "type": "number",
+          "minimum": 0
+        },
+        "k1": {
+          "description": "Параметр упрочнения\n[-]",
+          "type": "number",
+          "minimum": 0
+        },
+        "k2": {
+          "description": "Параметр упрочнения\n[-]",
+          "type": "number",
+          "minimum": 0
+        },
+        "hi": {
+          "description": "Параметр упрочнения\n[-]",
+          "type": "number",
+          "minimum": 0
+        },
+        "hp": {
+          "description": "Парметр закона Холла-Петча\n[-]",
+          "type": "number",
+          "minimum": 0
+        },
+        "displ_vel_grad": {
+          "description": "Градиент скорости перемещений\n(можно задать либо просто массивом постоянное значение, либо указать путь к .txt файлу, в котором будет записана эволюция градиента скорости перемещений в формате [t, L11, L12, L13, L22, L23, L33])\n[s^-1]",
+          "oneOf": [
+            {
+              "type": "array",
+              "minItems": 9,
+              "maxItems": 9,
+              "items": {
+                "type": "number"
+              }
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "temp": {
+          "description": "Температура\n(можно задать либо просто числом постоянное значение, либо указать путь к .txt файлу, в котором будет написана эволюция температуры со временем в формате [t, temp])\n[K]",
+          "oneOf": [
+            {
+              "type": "number",
+              "minimum": 0
+            },
+            {
+              "type": "string"
+            }
+          ]
+          "gr_r_init",
+          :,
+          {
+            "description": "Начальный размер (радиус) зерен\n(Размеры зерен задаются по распределению...)\n[m]",
+            "type": "number",
+            "minimum": 0
+          }
         }
+      },
+      "rx_params": {
+        "type": "object",
+        "description": "Параметры рекристаллизации",
+        "properties": {
+          "rx_on": {
+            "description": "Вкл/выкл рекристаллизации",
+            "type": "boolean"
+          },
+          "e_gb": {
+            "description": "Энергия межзеренной границы\n[J * m^-2]",
+            "type": "number",
+            "minimum": 0
+          },
+          "m_hag": {
+            "description": "Мобильность большеугловой границы\n[m^4 * J^-1 * s^-1]",
+            "type": "number",
+            "minimum": 0
+          },
+          "m_lag": {
+            "description": "Мобильность малоугловой границы\n(если равно числу, то параметр m_lag0 не используется, если равно null, то m_lag = m_lag0 * m_hag)\n[m^4 * J^-1 * s^-1]",
+            "oneOf": [
+              {
+                "type": "number",
+                "minimum": 0
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "m_lag0": {
+            "description": "Множитель мобильности малоугловой границы\n(m_lag = m_lag0 * m_hag)\n[-]",
+            "type": "number",
+            "minimum": 0
+          },
+          "gamma_sub": {
+            "description": "Энергия субзеренной границы\n[J * m^-2]",
+            "type": "number",
+            "minimum": 0
+          },
+          "k_sub": {
+            "description": "Параметр в соотношении для среднего размера субзерна\n[-]",
+            "type": "number",
+            "minimum": 0
+          },
+          "gr_r_min": {
+            "description": "Минимальный размер (радиус) зерна, ниже которого зерно можно считать по размеру равным субзерну, в результате зерно удаляется из выборки\n[m]",
+            "type": "number",
+            "minimum": 0
+          }
+        }
+      }
     }
-}
+  }
